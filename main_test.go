@@ -7,19 +7,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
 
-func setupRouter() *gin.Engine {
-	r := gin.Default()
-	r.POST("/receipts/process", processReceipt)
-	r.GET("/receipts/:id/points", getPoints)
-	return r
-}
-
 func TestProcessReceipt_ValidInput(t *testing.T) {
-	router := setupRouter()
+	router := setupRouter() 
 
 	receipt := Receipt{
 		Retailer:     "Test Store",
@@ -43,7 +35,7 @@ func TestProcessReceipt_ValidInput(t *testing.T) {
 }
 
 func TestProcessReceipt_InvalidDate(t *testing.T) {
-	router := setupRouter()
+	router := setupRouter() 
 
 	receipt := Receipt{
 		Retailer:     "Test Store",
@@ -64,7 +56,7 @@ func TestProcessReceipt_InvalidDate(t *testing.T) {
 }
 
 func TestProcessReceipt_InvalidTime(t *testing.T) {
-	router := setupRouter()
+	router := setupRouter() 
 
 	receipt := Receipt{
 		Retailer:     "Test Store",
@@ -85,7 +77,7 @@ func TestProcessReceipt_InvalidTime(t *testing.T) {
 }
 
 func TestGetPoints_ValidReceipt(t *testing.T) {
-	router := setupRouter()
+	router := setupRouter() 
 
 	receipt := Receipt{
 		Retailer:     "Test Store",
@@ -96,7 +88,7 @@ func TestGetPoints_ValidReceipt(t *testing.T) {
 		},
 		Total: "10.00",
 	}
-	id := "test-id" // Use a predefined id for testing
+	id := "test-id" 
 	receipts[id] = receipt
 
 	req, _ := http.NewRequest("GET", "/receipts/"+id+"/points", nil)
@@ -108,8 +100,7 @@ func TestGetPoints_ValidReceipt(t *testing.T) {
 }
 
 func TestGetPoints_ReceiptNotFound(t *testing.T) {
-	router := setupRouter()
-
+	router := setupRouter() 
 	req, _ := http.NewRequest("GET", "/receipts/invalid-id/points", nil)
 	resp := httptest.NewRecorder()
 	router.ServeHTTP(resp, req)

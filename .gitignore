@@ -1,0 +1,43 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.bin
+*.out
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Go build artifacts
+*.test
+*.out
+
+# IDE/editor directories
+.idea/
+.vscode/
+*.suo
+*.ntvs_analysis.dat
+*.njsproj
+*.sln
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+Dockerfile
+
+# Misc
+*.tgz
+*.zip
+
+# Test coverage
+coverage.out
