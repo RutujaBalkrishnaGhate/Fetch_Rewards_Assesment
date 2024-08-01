@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestProcessReceipt_ValidInput tests the processReceipt function with valid input
 func TestProcessReceipt_ValidInput(t *testing.T) {
 	router := setupRouter() 
 
@@ -34,6 +35,7 @@ func TestProcessReceipt_ValidInput(t *testing.T) {
 	assert.Contains(t, resp.Body.String(), "id")
 }
 
+// TestProcessReceipt_InvalidDate tests the processReceipt function with an invalid date
 func TestProcessReceipt_InvalidDate(t *testing.T) {
 	router := setupRouter() 
 
@@ -55,6 +57,7 @@ func TestProcessReceipt_InvalidDate(t *testing.T) {
 	assert.Contains(t, resp.Body.String(), "Invalid purchase date format")
 }
 
+// TestProcessReceipt_InvalidTime tests the processReceipt function with an invalid time
 func TestProcessReceipt_InvalidTime(t *testing.T) {
 	router := setupRouter() 
 
@@ -76,6 +79,7 @@ func TestProcessReceipt_InvalidTime(t *testing.T) {
 	assert.Contains(t, resp.Body.String(), "Invalid purchase time format")
 }
 
+// TestGetPoints_ValidReceipt tests the getPoints function with a valid receipt
 func TestGetPoints_ValidReceipt(t *testing.T) {
 	router := setupRouter() 
 
@@ -99,6 +103,7 @@ func TestGetPoints_ValidReceipt(t *testing.T) {
 	assert.Contains(t, resp.Body.String(), "points")
 }
 
+// TestGetPoints_ReceiptNotFound tests the getPoints function with an invalid receipt ID
 func TestGetPoints_ReceiptNotFound(t *testing.T) {
 	router := setupRouter() 
 	req, _ := http.NewRequest("GET", "/receipts/invalid-id/points", nil)

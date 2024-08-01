@@ -12,6 +12,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// Receipt represents the structure of a receipt
 type Receipt struct {
 	Retailer     string `json:"retailer"`
 	PurchaseDate string `json:"purchaseDate"`
@@ -20,6 +21,7 @@ type Receipt struct {
 	Total        string `json:"total"`
 }
 
+// Item represents the structure of an item in the receipt
 type Item struct {
 	ShortDescription string `json:"shortDescription"`
 	Price            string `json:"price"`
@@ -27,6 +29,9 @@ type Item struct {
 
 var receipts = make(map[string]Receipt)
 
+
+// processReceipt handles the POST /receipts/process endpoint
+// It validates and processes a receipt, storing it in memory and returning a unique ID
 func processReceipt(c *gin.Context) {
 	var receipt Receipt
 
@@ -51,6 +56,8 @@ func processReceipt(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"id": id})
 }
 
+// getPoints handles the GET /receipts/:id/points endpoint
+// It retrieves the receipt by ID and returns the calculated points
 func getPoints(c *gin.Context) {
 	id := c.Param("id")
 	receipt, exists := receipts[id]
@@ -64,6 +71,7 @@ func getPoints(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"points": points})
 }
 
+// calculatePoints calculates the total points for a given receipt based on defined rules
 func calculatePoints(receipt Receipt) int {
 	points := 0
 
@@ -101,6 +109,7 @@ func calculatePoints(receipt Receipt) int {
 	return points
 }
 
+// countAlphanumeric counts the number of alphanumeric characters in a string
 func countAlphanumeric(str string) int {
 	re := regexp.MustCompile("[a-zA-Z0-9]")
 	return len(re.FindAllString(str, -1))
