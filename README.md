@@ -1,4 +1,4 @@
-# Fetch_Rewards_Assesment
+# Fetch_Rewards_Assessment
 <!DOCTYPE html>
 <html lang="en">
 <head>
